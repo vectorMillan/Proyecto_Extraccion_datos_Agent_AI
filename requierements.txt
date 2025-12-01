@@ -1,0 +1,21 @@
+# --- Framework Core ---
+# Usaremos la última versión estable de Django
+Django>=5.0,<5.2
+
+# --- Base de Datos ---
+# Conector estándar de alto rendimiento para MySQL
+mysqlclient
+
+# --- Procesamiento de Archivos e IA ---
+# Para extraer texto de los PDFs (rápido y eficiente)
+pymupdf
+# Para hacer peticiones HTTP al servidor local de Ollama
+requests
+
+# --- Configuración y Seguridad ---
+# Para leer el archivo .env y no hardcodear contraseñas en el código
+python-dotenv
+
+# --- Calidad de Código (Dev Tools) ---
+# Formateador de código automático (Estándar PEP 8)
+black

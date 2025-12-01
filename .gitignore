@@ -1,0 +1,17 @@
+# Python y Entorno Virtual
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# IDEs (Opcional, por si usas VS Code o PyCharm)
+.vscode/
+.idea/
