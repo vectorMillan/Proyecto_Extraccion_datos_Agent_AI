@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,12 +35,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'tesis',
 ]
 
 MIDDLEWARE = [
@@ -74,8 +81,12 @@ WSGI_APPLICATION = 'extraccion_datos.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME', 'tesis_db'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '1234'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
@@ -120,3 +131,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Le dice a Django que usaremos nuestro propio modelo de usuario
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# Configuración visual de Jazzmin
+JAZZMIN_SETTINGS = {
+    "site_title": "Sistema de Tesis",
+    "site_header": "Administración de Tesis",
+    "site_brand": "Tesis Admin",
+    "welcome_sign": "Bienvenido al Sistema de Gestión de Tesis",
+    "copyright": "Victor Millán",
+    "search_model": ["users.CustomUser", "theses.Thesis"], # Barra de búsqueda global
+    
+    # Menú lateral
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    
+    # Iconos para tus apps (usamos iconos de FontAwesome)
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "users.CustomUser": "fas fa-user",
+        "theses.Thesis": "fas fa-book",
+        "theses.PostgraduateProgram": "fas fa-graduation-cap",
+    },
+}
