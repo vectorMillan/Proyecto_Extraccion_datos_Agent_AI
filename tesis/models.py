@@ -27,11 +27,14 @@ class Tesis(models.Model):
         verbose_name="Tipo de Posgrado"
     )
 
+    publication_year = models.IntegerField(verbose_name="Año")
+    abstract = models.TextField(verbose_name="Resumen/Abstract")
+
     # Archivo PDF
     pdf_file = models.FileField(upload_to='tesis_pdfs/', verbose_name="Archivo PDF")
 
     # Fecha de creacion
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creacion")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     # Fecha de actualizacion
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
