@@ -35,15 +35,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
-    'django.contrib.admin',
-    'django.contrib.auth',
+    'jazzmin', # <--- AGREGAR ESTO AQUÍ (Arriba de admin) Interfaz moderna para el admin
+    'django.contrib.admin', # Administrador base de django
+    'django.contrib.auth', # Sistema base autenticacion de django (login / logout)
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    'tesis',
+    'users', # Nuestra app para gestionar usuarios (CustomUser)
+    'tesis', # Nuestra app para gestionar tesis (Tesis)
 ]
 
 MIDDLEWARE = [
@@ -136,13 +136,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # Configuración visual de Jazzmin
+# Define titulos, iconos y textos del panel de administración
 JAZZMIN_SETTINGS = {
     "site_title": "Sistema de Tesis",
     "site_header": "Administración de Tesis",
     "site_brand": "Tesis Admin",
     "welcome_sign": "Bienvenido al Sistema de Gestión de Tesis",
     "copyright": "Victor Millán",
-    "search_model": ["users.CustomUser", "theses.Thesis"], # Barra de búsqueda global
+    "search_model": ["users.CustomUser", "tesis.Tesis"], # Barra de búsqueda global
     
     # Menú lateral
     "show_sidebar": True,
@@ -156,3 +157,14 @@ JAZZMIN_SETTINGS = {
         "theses.PostgraduateProgram": "fas fa-graduation-cap",
     },
 }
+
+# settings.py
+
+# Si el usuario intenta entrar a una pag protegida, lo manda a loguearse aquí:
+LOGIN_URL = 'login' # Si intentan entrar sin permiso, lo manda a login
+
+# Una vez que se loguea exitosamente, lo mandamos al Dashboard (que crearemos ahorita)
+LOGIN_REDIRECT_URL = 'dashboard' # Una vez que se loguea exitosamente, lo mandamos al Dashboard (que crearemos ahorita)
+
+# Al cerrar sesión, lo mandamos al login otra vez
+LOGOUT_REDIRECT_URL = 'login' # Al cerrar sesión, lo mandamos al login otra vez
