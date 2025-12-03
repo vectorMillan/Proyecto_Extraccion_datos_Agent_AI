@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-900 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl font-bold">Sistema de Tesis</h1>
+
+                {% if user.is_staff %}
+                <a href="/admin/" target="_blank"
+                    class="bg-blue-700 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded border border-blue-500 transition">
+                    <i class="fas fa-cogs"></i> Ir al Admin
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="flex items-center gap-4">
+                <span>Hola, <span class="font-semibold">{{ user.username }}</span></span>
+                <form action="{% url 'logout' %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="text-red-300 hover:text-white hover:underline text-sm">Cerrar
+                        Sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-10 p-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">¿Qué deseas hacer hoy?</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <a href="#"
+                class="block p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition border-l-4 border-green-500 hover:bg-green-50">
+                <div class="text-green-600 text-4xl mb-4">
+                    <i class="fas fa-file-upload"></i> 📤
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Registrar Nueva Tesis</h3>
+                <p class="text-gray-600 mt-2">Sube un PDF y deja que la IA extraiga los datos por ti.</p>
+            </a>
+
+            <a href="#"
+                class="block p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition border-l-4 border-blue-500 hover:bg-blue-50">
+                <div class="text-blue-600 text-4xl mb-4">
+                    <i class="fas fa-edit"></i> 📋
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Administrar Tesis</h3>
+                <p class="text-gray-600 mt-2">Ver, editar o eliminar tesis ya registradas.</p>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
