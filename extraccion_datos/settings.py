@@ -153,8 +153,8 @@ JAZZMIN_SETTINGS = {
     "icons": {
         "auth": "fas fa-users-cog",
         "users.CustomUser": "fas fa-user",
-        "theses.Thesis": "fas fa-book",
-        "theses.PostgraduateProgram": "fas fa-graduation-cap",
+        "tesis.Tesis": "fas fa-book",
+        "tesis.PostgraduateProgram": "fas fa-graduation-cap",
     },
 }
 
