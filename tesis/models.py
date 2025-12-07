@@ -1,6 +1,10 @@
 from django.db import models
 from django.conf import settings
 
+import os
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
+
 # Create your models here.
 # 1.- Catalogo de Posgrados
 class PostgraduateProgram(models.Model):
@@ -42,3 +46,15 @@ class Tesis(models.Model):
     def __str__(self):
         return self.titulo
     
+@receiver(post_delete, sender=Tesis)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Borra el archivo del sistema de archivos cuando se elimina el objeto `Tesis` correspondiente.
+    """
+    if instance.pdf_file:
+        if os.path.isfile(instance.pdf_file.path):
+            try:
+                os.remove(instance.pdf_file.path)
+                print(f"Archivo eliminado correctamente: {instance.pdf_file.path}")
+            except Exception as e:
+                print(f"Error al eliminar archivo: {e}")

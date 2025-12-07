@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Tesis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold text-gray-800">Administración de Tesis</h2>
+            <div class="space-x-2">
+                <a href="{% url 'dashboard' %}"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+                <a href="{% url 'tesis_create' %}"
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    <i class="fas fa-plus"></i> Nueva Tesis
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+            <table class="min-w-full table-auto">
+                <thead>
+                    <tr class="bg-blue-900 text-white uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Título</th>
+                        <th class="py-3 px-6 text-left">Autor</th>
+                        <th class="py-3 px-6 text-center">Posgrado</th>
+                        <th class="py-3 px-6 text-center">Año</th>
+                        <th class="py-3 px-6 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    {% for tesis in tesis %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                            <div class="font-medium">{{ tesis.titulo|truncatechars:40 }}</div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            {{ tesis.autor_name }}
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <span class="bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-xs">
+                                {{ tesis.program.name|default:"Sin asignar" }}
+                            </span>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            {{ tesis.publication_year }}
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <div class="flex item-center justify-center gap-2">
+                                <a href="{% url 'tesis_edit' tesis.pk %}"
+                                    class="w-8 h-8 flex items-center justify-center bg-yellow-100 text-yellow-600 rounded-full hover:bg-yellow-200 transition"
+                                    title="Editar">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <a href="{% url 'tesis_delete' tesis.pk %}"
+                                    class="w-8 h-8 flex items-center justify-center bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition"
+                                    title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="py-6 text-center text-gray-500">
+                            No hay tesis registradas aún.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

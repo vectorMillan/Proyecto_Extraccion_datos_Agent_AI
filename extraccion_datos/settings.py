@@ -168,3 +168,10 @@ LOGIN_REDIRECT_URL = 'dashboard' # Una vez que se loguea exitosamente, lo mandam
 
 # Al cerrar sesión, lo mandamos al login otra vez
 LOGOUT_REDIRECT_URL = 'login' # Al cerrar sesión, lo mandamos al login otra vez
+
+# CONFIGURACIÓN DE ARCHIVOS MULTIMEDIA (MEDIA)
+# URL base para acceder a los archivos desde el navegador
+MEDIA_URL = '/media/'
+
+# Ruta física en tu disco duro donde se guardarán los archivos
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

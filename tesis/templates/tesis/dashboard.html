@@ -36,7 +36,7 @@
         <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">¿Qué deseas hacer hoy?</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <a href="#"
+            <a href="{% url 'tesis_create' %}"
                 class="block p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition border-l-4 border-green-500 hover:bg-green-50">
                 <div class="text-green-600 text-4xl mb-4">
                     <i class="fas fa-file-upload"></i> 📤
@@ -45,7 +45,7 @@
                 <p class="text-gray-600 mt-2">Sube un PDF y deja que la IA extraiga los datos por ti.</p>
             </a>
 
-            <a href="#"
+            <a href="{% url 'tesis_list' %}"
                 class="block p-8 bg-white rounded-lg shadow-lg hover:shadow-xl transition border-l-4 border-blue-500 hover:bg-blue-50">
                 <div class="text-blue-600 text-4xl mb-4">
                     <i class="fas fa-edit"></i> 📋
