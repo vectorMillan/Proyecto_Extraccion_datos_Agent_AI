@@ -6,6 +6,10 @@ from django.conf import settings
 class PostgraduateProgram(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="Nombre del Posgrado")
 
+    class Meta:
+        verbose_name = "Programa de Posgrado"
+        verbose_name_plural = "Programas de Posgrado"
+    
     def __str__(self):
         return self.name
 
@@ -38,6 +42,10 @@ class Tesis(models.Model):
 
     # Fecha de actualizacion
     uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
+    class Meta:
+        verbose_name = "Tesis"
+        verbose_name_plural = "Tesis"
     
     def __str__(self):
         return self.titulo
