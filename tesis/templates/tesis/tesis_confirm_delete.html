@@ -18,6 +18,8 @@
         </p>
 
         <form method="post">
+            # ¿Que es csrf_token? CSRF_token es un token que se genera automaticamente por django para prevenir ataques
+            de tipo Cross Site Request Forgery (CSRF).
             {% csrf_token %}
             <div class="flex justify-end gap-3">
                 <a href="{% url 'tesis_list' %}"

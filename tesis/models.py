@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+# Importaciones necesarias para el manejo de archivos
 import os
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
@@ -45,7 +46,8 @@ class Tesis(models.Model):
     
     def __str__(self):
         return self.titulo
-    
+
+# 3.- Señal para eliminar el archivo PDF cuando se elimina el objeto Tesis
 @receiver(post_delete, sender=Tesis)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """

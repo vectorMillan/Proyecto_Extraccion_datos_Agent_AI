@@ -12,14 +12,14 @@ from django.contrib.auth.decorators import login_required
 def dashboard_view(request):
     return render(request, 'tesis/dashboard.html')
 
-# 2. LISTAR TESIS (Read)
+# 1. LISTAR TESIS (Read)
 class TesisListView(LoginRequiredMixin, ListView):
     model = Tesis
     template_name = 'tesis/tesis_list.html'
     context_object_name = 'tesis'
     ordering = ['-created_at'] # Las más nuevas primero
 
-# 3. CREAR TESIS MANUALMENTE (Create)
+# 2. CREAR TESIS MANUALMENTE (Create)
 class TesisCreateView(LoginRequiredMixin, CreateView):
     model = Tesis
     form_class = TesisForm
@@ -31,14 +31,14 @@ class TesisCreateView(LoginRequiredMixin, CreateView):
         form.instance.uploaded_by = self.request.user
         return super().form_valid(form)
 
-# 4. EDITAR TESIS (Update)
+# 3. EDITAR TESIS (Update)
 class TesisUpdateView(LoginRequiredMixin, UpdateView):
     model = Tesis
     form_class = TesisForm
     template_name = 'tesis/tesis_form.html' # Reutilizamos el mismo template de crear
     success_url = reverse_lazy('tesis_list')
 
-# 5. ELIMINAR TESIS (Delete)
+# 4. ELIMINAR TESIS (Delete)
 class TesisDeleteView(LoginRequiredMixin, DeleteView):
     model = Tesis
     template_name = 'tesis/tesis_confirm_delete.html'
